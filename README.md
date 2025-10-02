@@ -40,6 +40,9 @@ Hack_Aura/
 │   └── val2/                   # Validation images and labels
 ├── test2/                      # Test dataset (gitignored)
 └── README.md
+
+- [Download train_2.zip](https://storage.googleapis.com/duality-public-share/Datasets/hackathon2_train_3.zip)
+- [Download test2.zip](https://storage.googleapis.com/duality-public-share/Datasets/hackathon2_test3.zip)
 ```
 
 ## 🛠️ Installation
@@ -58,11 +61,21 @@ cd Hackathon2_scripts/ENV_SETUP
 setup_env.bat
 ```
 
-#### For macOS/Linux:
+#### For macOS:
 ```bash
 cd Hackathon2_scripts/ENV_SETUP
 chmod +x setup_env.sh
 ./setup_env.sh
+```
+
+#### For Linux:
+```bash
+cd Hackathon2_scripts/ENV_SETUP
+bash setup_env_linux.sh            # CPU-only install (default)
+
+# or specify CUDA build if you have an NVIDIA GPU and drivers installed
+bash setup_env_linux.sh cuda12     # CUDA 12.1 build
+bash setup_env_linux.sh cuda11     # CUDA 11.8 build
 ```
 
 #### Manual Installation:

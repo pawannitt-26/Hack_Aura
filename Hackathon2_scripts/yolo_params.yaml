@@ -1,0 +1,5 @@
+train: ../train_2/train2
+val: ../train_2/val2
+test: ../test2
+nc: 7
+names: ['OxygenTank', 'NitrogenTank', 'FirstAidBox', 'FireAlarm', 'SafetySwitchPanel', 'EmergencyPhone', 'FireExtinguisher']                                         

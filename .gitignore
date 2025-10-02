@@ -1,0 +1,23 @@
+# Dataset directories
+/test2/
+/train_2/
+Hackathon2_scripts/runs/
+Hackathon2_scripts/predictions/
+Hackathon2_scripts/**/weights/
+Hackathon2_scripts/**/*.pt
+Hackathon2_scripts/**/*.onnx
+Hackathon2_scripts/**/*.engine
+Hackathon2_scripts/**/*.tflite
+Hackathon2_scripts/**/*.ckpt
+Hackathon2_scripts/**/*.pth
+Hackathon2_scripts/**/*.log
+Hackathon2_scripts/**/*.csv
+Hackathon2_scripts/**/*.cache
+Hackathon2_scripts/**/__pycache__/
+Hackathon2_scripts/**/.ipynb_checkpoints/
+Hackathon2_scripts/**/.DS_Store
+.DS_Store
+*.tmp
+*.log
+*.cache
+*.bak

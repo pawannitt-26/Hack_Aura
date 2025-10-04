@@ -27,22 +27,36 @@ This project implements a custom YOLOv8 model trained to detect critical safety 
 
 ```
 Hack_Aura/
-├── Hackathon2_scripts/          # Main scripts and model files
-│   ├── train.py                 # Model training script
-│   ├── predict.py               # Inference and prediction script
-│   ├── visualize.py             # Dataset visualization tool
-│   ├── yolo_params.yaml         # Dataset configuration
-│   ├── yolov8s.pt              # Pre-trained YOLOv8 weights
-│   ├── classes.txt             # Class names definition
+├── src/                        # Source code and scripts
+│   ├── train_model.py          # Model training script
+│   ├── run_inference.py        # Inference and prediction script
+│   ├── visualize_dataset.py    # Dataset visualization tool
+│   ├── models/                 # Model files
+│   │   ├── safety_equipment_model.pt    # Trained model weights
+│   │   └── pretrained_yolov8s.pt       # Pre-trained YOLOv8 weights
+│   ├── configs/                # Configuration files
+│   │   ├── dataset_config.yaml # Dataset configuration
+│   │   └── class_names.txt     # Class names definition
 │   └── ENV_SETUP/              # Environment setup scripts
-├── train_2/                    # Training dataset (gitignored)
-│   ├── train2/                 # Training images and labels
-│   └── val2/                   # Validation images and labels
-├── test2/                      # Test dataset (gitignored)
+├── apps/                       # Application interfaces
+│   ├── streamlit/              # Web application
+│   │   └── streamlit_app.py    # Streamlit web interface
+│   └── desktop/                # Desktop application
+│       └── tkinter_app.py      # Tkinter desktop interface
+├── datasets/                   # Dataset directories
+│   ├── training/               # Training images and labels
+│   ├── validation/             # Validation images and labels
+│   └── testing/                # Test images and labels
+├── docs/                       # Documentation
+│   ├── Application.md          # Application documentation
+│   ├── falcon_integration_plan.md  # Falcon integration plan
+│   └── logs.md                 # Log files
+├── run_streamlit.py            # Launcher for web app
+├── run_desktop.py              # Launcher for desktop app
 └── README.md
 
-- [Download train_2.zip](https://storage.googleapis.com/duality-public-share/Datasets/hackathon2_train_3.zip)
-- [Download test2.zip](https://storage.googleapis.com/duality-public-share/Datasets/hackathon2_test3.zip)
+- [Download training dataset](https://storage.googleapis.com/duality-public-share/Datasets/hackathon2_train_3.zip)
+- [Download test dataset](https://storage.googleapis.com/duality-public-share/Datasets/hackathon2_test3.zip)
 ```
 
 ## 🛠️ Installation
@@ -57,20 +71,20 @@ Hack_Aura/
 
 #### For Windows:
 ```bash
-cd Hackathon2_scripts/ENV_SETUP
+cd src/ENV_SETUP
 setup_env.bat
 ```
 
 #### For macOS:
 ```bash
-cd Hackathon2_scripts/ENV_SETUP
+cd src/ENV_SETUP
 chmod +x setup_env.sh
 ./setup_env.sh
 ```
 
 #### For Linux:
 ```bash
-cd Hackathon2_scripts/ENV_SETUP
+cd src/ENV_SETUP
 bash setup_env_linux.sh            # CPU-only install (default)
 
 # or specify CUDA build if you have an NVIDIA GPU and drivers installed
@@ -85,13 +99,33 @@ pip install ultralytics opencv-python PyYAML
 
 ## 🏃‍♂️ Usage
 
+### Quick Start
+
+#### Web Application (Streamlit)
+```bash
+# Easy launcher
+python run_streamlit.py
+
+# Or run directly
+streamlit run apps/streamlit/streamlit_app.py
+```
+
+#### Desktop Application (Tkinter)
+```bash
+# Easy launcher
+python run_desktop.py
+
+# Or run directly
+python apps/desktop/tkinter_app.py
+```
+
 ### Training the Model
 
 Train a custom YOLOv8 model on your safety equipment dataset:
 
 ```bash
-cd Hackathon2_scripts
-python train.py --epochs 100 --lr0 0.001 --device cuda
+cd src
+python train_model.py --epochs 100 --lr0 0.001 --device cuda
 ```
 
 **Training Parameters:**
@@ -108,12 +142,12 @@ python train.py --epochs 100 --lr0 0.001 --device cuda
 Perform inference on test images:
 
 ```bash
-cd Hackathon2_scripts
-python predict.py
+cd src
+python run_inference.py
 ```
 
 The script will:
-1. Load the best trained model from `runs/detect/train*/weights/best.pt`
+1. Load the best trained model from `models/safety_equipment_model.pt`
 2. Process all images in the test directory
 3. Save predicted images with bounding boxes to `predictions/images/`
 4. Save label files in YOLO format to `predictions/labels/`
@@ -124,8 +158,8 @@ The script will:
 Interactively browse your training and validation data:
 
 ```bash
-cd Hackathon2_scripts
-python visualize.py
+cd src
+python visualize_dataset.py
 ```
 
 **Controls:**
@@ -137,13 +171,13 @@ python visualize.py
 
 ## ⚙️ Configuration
 
-Edit `yolo_params.yaml` to customize dataset paths and parameters:
+Edit `configs/dataset_config.yaml` to customize dataset paths and parameters:
 
 ```yaml
-train: ../train_2/train2      # Training data path
-val: ../train_2/val2          # Validation data path  
-test: ../test2                # Test data path
-nc: 7                         # Number of classes
+train: ../datasets/training      # Training data path
+val: ../datasets/validation      # Validation data path  
+test: ../datasets/testing        # Test data path
+nc: 7                            # Number of classes
 names: ['OxygenTank', 'NitrogenTank', 'FirstAidBox', 'FireAlarm', 'SafetySwitchPanel', 'EmergencyPhone', 'FireExtinguisher']
 ```
 

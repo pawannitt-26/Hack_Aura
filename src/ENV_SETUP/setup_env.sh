@@ -6,7 +6,7 @@ conda create -n EDU python=3.10 -y
 
 # Activate the environment
 echo "Activating EDU environment..."
-source activate EDU
+conda activate EDU
 
 # Install PyTorch (Mac-compatible version)
 echo "Installing PyTorch..."

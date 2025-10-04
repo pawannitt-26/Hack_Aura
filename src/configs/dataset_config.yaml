@@ -1,5 +1,5 @@
-train: ../train_2/train2
-val: ../train_2/val2
-test: ../test2
+train: /Users/pawankumar/Hack_Aura/datasets/training
+val: /Users/pawankumar/Hack_Aura/datasets/validation
+test: /Users/pawankumar/Hack_Aura/datasets/testing
 nc: 7
 names: ['OxygenTank', 'NitrogenTank', 'FirstAidBox', 'FireAlarm', 'SafetySwitchPanel', 'EmergencyPhone', 'FireExtinguisher']                                         

@@ -1,0 +1,125 @@
+python Hackathon2_scripts/train.py                                                           ─╯
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 7% ╸───────────
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 21% ━━╸────────
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 40% ━━━━╸──────
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 46% ━━━━━╸─────
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 68% ━━━━━━━━───
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 89% ━━━━━━━━━━╸
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 93% ━━━━━━━━━━━
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 100% ━━━━━━━━━━
+Downloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8s.pt to '/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt': 100% ━━━━━━━━━━━━ 21.5MB 20.6MB/s 1.0s
+Ultralytics 8.3.204 🚀 Python-3.10.18 torch-2.5.1 CPU (Apple M2)
+engine/trainer: agnostic_nms=False, amp=True, augment=False, auto_augment=randaugment, batch=16, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, compile=False, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolo_params.yaml, degrees=0.0, deterministic=True, device=cpu, dfl=1.5, dnn=False, dropout=0.0, dynamic=False, embed=None, epochs=10, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=640, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=0.0001, lrf=0.0001, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=/Users/pawankumar/Hack_Aura/Hackathon2_scripts/yolov8s.pt, momentum=0.9, mosaic=0.4, multi_scale=False, name=train2, nbs=64, nms=False, opset=None, optimize=False, optimizer=AdamW, overlap_mask=True, patience=100, perspective=0.0, plots=True, pose=12.0, pretrained=True, profile=False, project=None, rect=False, resume=False, retina_masks=False, save=True, save_conf=False, save_crop=False, save_dir=/opt/homebrew/runs/detect/train2, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=0, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=True, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=8, workspace=None
+Overriding model.yaml nc=80 with nc=7
+
+                   from  n    params  module                                       arguments                     
+  0                  -1  1       928  ultralytics.nn.modules.conv.Conv             [3, 32, 3, 2]                 
+  1                  -1  1     18560  ultralytics.nn.modules.conv.Conv             [32, 64, 3, 2]                
+  2                  -1  1     29056  ultralytics.nn.modules.block.C2f             [64, 64, 1, True]             
+  3                  -1  1     73984  ultralytics.nn.modules.conv.Conv             [64, 128, 3, 2]               
+  4                  -1  2    197632  ultralytics.nn.modules.block.C2f             [128, 128, 2, True]           
+  5                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]              
+  6                  -1  2    788480  ultralytics.nn.modules.block.C2f             [256, 256, 2, True]           
+  7                  -1  1   1180672  ultralytics.nn.modules.conv.Conv             [256, 512, 3, 2]              
+  8                  -1  1   1838080  ultralytics.nn.modules.block.C2f             [512, 512, 1, True]           
+  9                  -1  1    656896  ultralytics.nn.modules.block.SPPF            [512, 512, 5]                 
+ 10                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 11             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 12                  -1  1    591360  ultralytics.nn.modules.block.C2f             [768, 256, 1]                 
+ 13                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']          
+ 14             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 15                  -1  1    148224  ultralytics.nn.modules.block.C2f             [384, 128, 1]                 
+ 16                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]              
+ 17            [-1, 12]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 18                  -1  1    493056  ultralytics.nn.modules.block.C2f             [384, 256, 1]                 
+ 19                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]              
+ 20             [-1, 9]  1         0  ultralytics.nn.modules.conv.Concat           [1]                           
+ 21                  -1  1   1969152  ultralytics.nn.modules.block.C2f             [768, 512, 1]                 
+ 22        [15, 18, 21]  1   2118757  ultralytics.nn.modules.head.Detect           [7, [128, 256, 512]]          
+Model summary: 129 layers, 11,138,309 parameters, 11,138,293 gradients, 28.7 GFLOPs
+
+Transferred 349/355 items from pretrained weights
+Freezing layer 'model.22.dfl.conv.weight'
+train: Fast image access ✅ (ping: 0.3±0.1 ms, read: 1078.0±338.2 MB/s, size: 3064.1 KB)
+train: Scanning /Users/pawankumar/Hack_Aura/train_2/train2/labels... 1767 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1767/1767 376.8it/s 4.7s
+train: New cache created: /Users/pawankumar/Hack_Aura/train_2/train2/labels.cache
+val: Fast image access ✅ (ping: 0.0±0.0 ms, read: 699.9±201.8 MB/s, size: 2778.1 KB)
+val: Scanning /Users/pawankumar/Hack_Aura/train_2/val2/labels... 336 images, 16 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 336/336 325.8it/s 1.0s
+val: New cache created: /Users/pawankumar/Hack_Aura/train_2/val2/labels.cache
+Plotting labels to /opt/homebrew/runs/detect/train2/labels.jpg... 
+optimizer: AdamW(lr=0.0001, momentum=0.9) with parameter groups 57 weight(decay=0.0), 64 weight(decay=0.0005), 63 bias(decay=0.0)
+Image sizes 640 train, 640 val
+Using 0 dataloader workers
+Logging results to /opt/homebrew/runs/detect/train2
+Starting training for 10 epochs...
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       1/10         0G     0.9461      2.176      1.104         41        640: 100% ━━━━━━━━━━━━ 111/111 0.1it/s 36:51
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:56
+                   all        336        957      0.592      0.375      0.418      0.336
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       2/10         0G     0.7774      1.208     0.9932         24        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 48:52
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:59
+                   all        336        957      0.675      0.531      0.592      0.479
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       3/10         0G     0.7041     0.9386     0.9589         24        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 43:44
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:43
+                   all        336        957      0.758      0.591      0.663      0.529
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       4/10         0G     0.6609     0.8003     0.9348         10        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 40:21
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:40
+                   all        336        957      0.768      0.648      0.697      0.573
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       5/10         0G     0.6226     0.7074     0.9167         11        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 39:16
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:41
+                   all        336        957      0.813       0.65       0.72      0.591
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       6/10         0G      0.599     0.6465     0.9089         13        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 38:38
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:46
+                   all        336        957      0.853       0.66      0.744      0.614
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       7/10         0G     0.5663      0.593     0.8896         36        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 38:44
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:44
+                   all        336        957      0.836      0.656      0.744      0.614
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       8/10         0G     0.5524     0.5628     0.8855         13        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 39:18
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:42
+                   all        336        957      0.931      0.627      0.755       0.62
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+       9/10         0G     0.5371     0.5403     0.8747         30        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 39:57
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:44
+                   all        336        957      0.868       0.67      0.764      0.633
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+      10/10         0G     0.5309     0.5261     0.8723         18        640: 100% ━━━━━━━━━━━━ 111/111 0.0it/s 40:57
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:44
+                   all        336        957      0.916       0.65      0.766      0.634
+
+10 epochs completed in 7.072 hours.
+Optimizer stripped from /opt/homebrew/runs/detect/train2/weights/last.pt, 22.5MB
+Optimizer stripped from /opt/homebrew/runs/detect/train2/weights/best.pt, 22.5MB
+
+Validating /opt/homebrew/runs/detect/train2/weights/best.pt...
+Ultralytics 8.3.204 🚀 Python-3.10.18 torch-2.5.1 CPU (Apple M2)
+Model summary (fused): 72 layers, 11,128,293 parameters, 0 gradients, 28.5 GFLOPs
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 11/11 0.1it/s 1:38
+                   all        336        957      0.916       0.65      0.766      0.634
+            OxygenTank        135        237      0.957      0.764      0.861      0.774
+          NitrogenTank        157        283      0.883      0.693       0.81      0.701
+           FirstAidBox         97        119      0.879      0.689      0.826      0.713
+             FireAlarm         55         57      0.935      0.761       0.86      0.723
+     SafetySwitchPanel         55         60      0.913       0.55      0.682      0.509
+        EmergencyPhone         60         69      0.914      0.522      0.611       0.45
+      FireExtinguisher         92        132      0.932      0.568      0.712      0.566
+Speed: 0.5ms preprocess, 238.7ms inference, 0.0ms loss, 0.4ms postprocess per image
+Results saved to /opt/homebrew/runs/detect/train2
+python(36289) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.

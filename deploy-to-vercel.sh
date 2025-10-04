@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 🚀 Vercel Deployment Script for Space Station Safety Detector
+# 🚀 Vercel Deployment Script for Space Station Safety Detector (Hugging Face Model)
 # This script prepares and deploys your app to Vercel
 
 echo "🛰️ Space Station Safety Detector - Vercel Deployment"
@@ -12,21 +12,9 @@ if [ ! -f "vercel.json" ]; then
     exit 1
 fi
 
-# Check if model file exists
-if [ ! -f "safety_equipment_model.pt" ]; then
-    echo "📦 Copying model file to root directory..."
-    if [ -f "src/models/safety_equipment_model.pt" ]; then
-        cp src/models/safety_equipment_model.pt safety_equipment_model.pt
-        echo "✅ Model file copied successfully"
-    else
-        echo "❌ Error: Model file not found in src/models/"
-        exit 1
-    fi
-fi
-
-# Check if required files exist
+# Check if required files exist (model not needed locally)
 echo "🔍 Checking required files..."
-required_files=("vercel.json" "api/index.py" "public/index.html" "requirements-vercel.txt" "safety_equipment_model.pt")
+required_files=("vercel.json" "api/index.py" "public/index.html" "requirements-vercel.txt")
 
 for file in "${required_files[@]}"; do
     if [ -f "$file" ]; then
@@ -70,7 +58,7 @@ fi
 
 # Deploy to Vercel
 echo "🚀 Deploying to Vercel..."
-echo "This may take 5-10 minutes due to model size..."
+echo "This should be quick — model will load from Hugging Face dynamically."
 
 vercel --prod
 
@@ -81,8 +69,9 @@ if [ $? -eq 0 ]; then
     echo ""
     echo "📋 Next steps:"
     echo "1. Test your deployment with sample images"
-    echo "2. Set up a custom domain (optional)"
-    echo "3. Monitor performance in Vercel dashboard"
+    echo "2. If model is private, ensure you’ve added your HF_TOKEN via:"
+    echo "   vercel env add HF_TOKEN"
+    echo "3. Monitor logs using 'vercel logs <deployment-url>'"
     echo ""
     echo "🛰️ Happy detecting!"
 else

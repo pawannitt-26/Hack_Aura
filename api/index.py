@@ -7,41 +7,38 @@ import numpy as np
 import cv2
 from ultralytics import YOLO
 import os
-import requests
+from pathlib import Path
 
-# --- Hugging Face Model Info ---
-HF_REPO = "pawan-kumar/safety-equipment-model"  # 🔁 replace with your actual repo name
+# --- Model Configuration ---
 MODEL_FILENAME = "safety_equipment_model.pt"
-MODEL_PATH = f"/tmp/{MODEL_FILENAME}"
-HF_TOKEN = os.environ.get("HF_TOKEN", None)  # add this in Vercel if model is private
 
 # --- Model Caching ---
 _model = None
-
-def download_model():
-    """Download model from Hugging Face if not cached."""
-    if os.path.exists(MODEL_PATH):
-        return MODEL_PATH
-
-    print("📥 Downloading model from Hugging Face...")
-    headers = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
-    url = f"https://huggingface.co/{HF_REPO}/resolve/main/{MODEL_FILENAME}"
-
-    with requests.get(url, headers=headers, stream=True) as r:
-        r.raise_for_status()
-        with open(MODEL_PATH, "wb") as f:
-            for chunk in r.iter_content(chunk_size=8192):
-                f.write(chunk)
-
-    print("✅ Model downloaded successfully:", MODEL_PATH)
-    return MODEL_PATH
 
 def load_model():
     """Load YOLO model (cached globally)."""
     global _model
     if _model is None:
         try:
-            model_path = download_model()
+            # Try multiple possible model paths
+            possible_paths = [
+                f"../src/models/{MODEL_FILENAME}",
+                f"src/models/{MODEL_FILENAME}",
+                f"./{MODEL_FILENAME}",
+                f"/tmp/{MODEL_FILENAME}"
+            ]
+            
+            model_path = None
+            for path in possible_paths:
+                if os.path.exists(path):
+                    model_path = path
+                    break
+            
+            if model_path is None:
+                print(f"❌ Model file not found. Tried paths: {possible_paths}")
+                return None
+                
+            print(f"📥 Loading model from: {model_path}")
             _model = YOLO(model_path)
             print("✅ Model loaded successfully")
         except Exception as e:

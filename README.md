@@ -189,10 +189,64 @@ The model uses YOLOv8s architecture with the following specifications:
 - **Layers**: 225 total layers
 - **Input Resolution**: Configurable (default: 640x640)
 
+### Validation Results
+
+The model has been validated on a comprehensive test dataset with the following performance metrics:
+
+#### Performance Curves
+
+**F1-Confidence Curve**
+![F1-Confidence Curve](src/runs/val_test/BoxF1_curve.png)
+
+**Precision-Recall Curve**
+![Precision-Recall Curve](src/runs/val_test/BoxPR_curve.png)
+
+**Precision Curve**
+![Precision Curve](src/runs/val_test/BoxP_curve.png)
+
+**Recall Curve**
+![Recall Curve](src/runs/val_test/BoxR_curve.png)
+
+#### Class-wise Performance
+The model shows varying performance across different safety equipment classes:
+
+| Class | Peak F1 Score | Optimal Confidence |
+|-------|---------------|-------------------|
+| OxygenTank | ~0.75 | 0.2-0.3 |
+| NitrogenTank | ~0.70 | 0.2-0.3 |
+| FirstAidBox | ~0.70 | 0.2-0.3 |
+| FireExtinguisher | ~0.60 | 0.2-0.3 |
+| SafetySwitchPanel | ~0.58-0.60 | 0.2-0.3 |
+| FireAlarm | ~0.48-0.50 | 0.2-0.3 |
+| EmergencyPhone | ~0.45 | 0.2-0.3 |
+
+#### Validation Visualizations
+
+**Confusion Matrix**
+![Confusion Matrix](src/runs/val_test/confusion_matrix.png)
+
+**Normalized Confusion Matrix**
+![Normalized Confusion Matrix](src/runs/val_test/confusion_matrix_normalized.png)
+
+**Sample Validation Predictions**
+
+*Ground Truth vs Predictions - Batch 0*
+![Validation Batch 0 - Labels](src/runs/val_test/val_batch0_labels.jpg)
+![Validation Batch 0 - Predictions](src/runs/val_test/val_batch0_pred.jpg)
+
+*Ground Truth vs Predictions - Batch 1*
+![Validation Batch 1 - Labels](src/runs/val_test/val_batch1_labels.jpg)
+![Validation Batch 1 - Predictions](src/runs/val_test/val_batch1_pred.jpg)
+
+*Ground Truth vs Predictions - Batch 2*
+![Validation Batch 2 - Labels](src/runs/val_test/val_batch2_labels.jpg)
+![Validation Batch 2 - Predictions](src/runs/val_test/val_batch2_pred.jpg)
+
 ### Training Tips
 - Mosaic augmentation improves validation but may reduce test performance
 - AdamW optimizer with low learning rates works best for this dataset
 - CPU training is supported but GPU training is recommended for speed
+- Optimal confidence threshold of 0.225 provides best overall F1 score
 
 ## 📝 License
 
